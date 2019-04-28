@@ -1,0 +1,90 @@
+The key will be randomized upon each run of program.
+
+#Feel free to use letters and punctuation.
+#Numbers should not be used, although it would be fairly simple to add them to the program
+
+#alpha and key
+
+alpha = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","!",".",",","?"]
+key = ["A","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Z","X","C","V","B","N","M","1","2","3","4"]
+
+import random
+random.shuffle(key)
+
+#functions
+
+#menu
+def menu():
+  print("SECRET DECODER MENU")
+  print("")
+  print("0) Quit")
+  print("1) Encode")
+  print("2) Decode")
+  print("")
+
+#encoding
+def encode(plain):
+  encoded = ""
+  for character in plain:
+    if character not in alpha:
+      encoded = encoded + " "
+    if character in alpha:
+      character = (alpha.index(character))
+      sub = key[character]
+      encoded = encoded + sub
+  return encoded
+
+#decoding
+def decode(coded):
+  decoded = ""
+  for char in coded:
+    if char not in key:
+      decoded = decoded + " "
+    if char in key:
+      char = (key.index(char))
+      sub = alpha[char]
+      decoded = decoded + sub
+  return decoded
+
+
+#function to navigate menu
+def main(response):
+  keepGoing = True
+  while keepGoing:
+    if response == "1":
+      plain = input("Text to be encoded: ")
+      plain = plain.upper()
+      encode(plain)
+      print("Encoded text: {}".format(encode(plain)))
+      print("")
+      print("")
+      run()
+    elif response == "2":
+      coded = input("Code to be decyphered: ")
+      coded = coded.upper()
+      decode(coded)
+      print("Decoded text: {}".format(decode(coded)))
+      print("")
+      print("")
+      run()
+    elif response == "0":
+      print ("Thanks for doing secret spy stuff with me.")
+      keepGoing = False
+    else:
+      print("I don't know what you want to do...")
+      keepGoing = False
+      print("")
+      run()
+
+#running program
+def run():
+  menu()
+  response = input("What would you like to do? ")
+  main(response)
+  
+
+#begin program
+run()
+
+
+
